@@ -7,7 +7,7 @@
   <meta name="description" content="NexusAI – ChatGPT-like AI assistant with streaming, memory, and RAG." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" id="hljs-theme" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/10.0.0/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -21,7 +21,7 @@
 
     <!-- Logo -->
     <div class="auth-logo">
-      <svg width="28" height="28" viewBox="0 0 41 41" fill="none"><path d="M37.532 16.87a9.963 9.963 0 0 0-.856-8.184 10.078 10.078 0 0 0-10.855-4.835 9.964 9.964 0 0 0-6.75-3.668 10.078 10.078 0 0 0-10.855 4.835 9.965 9.965 0 0 0-6.75 3.668 10.079 10.079 0 0 0-1.252 11.954 9.963 9.963 0 0 0 .856 8.185 10.079 10.079 0 0 0 10.855 4.835 9.965 9.965 0 0 0 6.75 3.668 10.079 10.079 0 0 0 10.855-4.835 9.965 9.965 0 0 0 6.75-3.668 10.079 10.079 0 0 0 1.252-11.954Zm-15.576 21.737a7.48 7.48 0 0 1-4.801-1.735c.061-.033.168-.091.237-.134l7.964-4.6a1.294 1.294 0 0 0 .655-1.134V19.054l3.366 1.944a.12.12 0 0 1 .066.092v9.299a7.505 7.505 0 0 1-7.487 7.218ZM4.191 33.103a7.477 7.477 0 0 1-.894-5.023c.06.036.162.099.237.141l7.964 4.6a1.297 1.297 0 0 0 1.308 0l9.724-5.614v3.888a.12.12 0 0 1-.048.103l-8.051 4.649a7.504 7.504 0 0 1-10.24-2.744ZM2.756 14.128a7.477 7.477 0 0 1 3.906-3.295A.121.121 0 0 1 6.69 11v9.199a1.294 1.294 0 0 0 .654 1.132l9.723 5.614-3.366 1.944a.12.12 0 0 1-.114.012L4.502 24.2a7.504 7.504 0 0 1-1.746-10.073Zm27.658 6.437-9.724-5.615 3.367-1.943a.121.121 0 0 1 .114-.012l9.084 5.048a7.498 7.498 0 0 1-1.158 13.528v-9.476a1.293 1.293 0 0 0-.683-1.53Zm3.35-5.043c-.059-.037-.162-.099-.236-.141l-7.965-4.6a1.298 1.298 0 0 0-1.308 0l-9.723 5.614v-3.888a.12.12 0 0 1 .048-.103l8.051-4.645a7.497 7.497 0 0 1 11.133 7.763Zm-21.063 6.929-3.367-1.944a.12.12 0 0 1-.065-.092v-9.299a7.497 7.497 0 0 1 12.293-5.756 6.94 6.94 0 0 0-.236.134l-7.965 4.6a1.294 1.294 0 0 0-.654 1.132l-.006 11.225Zm1.829-3.943 4.33-2.501 4.332 2.5v4.999l-4.331 2.5-4.331-2.5V18.508Z" fill="currentColor"/></svg>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
     </div>
 
     <!-- ── LOGIN FORM ── -->
@@ -80,12 +80,20 @@
 <!-- ══════════ SIDEBAR ══════════ -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-top">
-    <button class="icon-btn" id="sidebarCloseBtn" title="Close sidebar">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-    </button>
-    <button class="icon-btn new-chat-icon" id="newChatBtn" title="New chat">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-    </button>
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <span class="sidebar-brand-name">NexusAI</span>
+    </div>
+    <div style="display:flex;gap:4px">
+      <button class="icon-btn new-chat-icon" id="newChatBtn" title="New chat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+      <button class="icon-btn" id="sidebarCloseBtn" title="Close sidebar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
   </div>
 
   <div class="sidebar-search">
@@ -147,7 +155,6 @@
       <div class="model-badge">
         <div class="model-dot"></div>
         <span id="modelLabel">NexusAI</span>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
       </div>
     </div>
     <div class="topbar-right">
@@ -170,10 +177,11 @@
   <div class="messages-container" id="messagesContainer">
     <!-- Welcome -->
     <div class="welcome-state" id="welcomeState">
-      <div class="welcome-logo">
-        <svg width="30" height="30" viewBox="0 0 41 41" fill="none"><path d="M37.532 16.87a9.963 9.963 0 0 0-.856-8.184 10.078 10.078 0 0 0-10.855-4.835 9.964 9.964 0 0 0-6.75-3.668 10.078 10.078 0 0 0-10.855 4.835 9.965 9.965 0 0 0-6.75 3.668 10.079 10.079 0 0 0-1.252 11.954 9.963 9.963 0 0 0 .856 8.185 10.079 10.079 0 0 0 10.855 4.835 9.965 9.965 0 0 0 6.75 3.668 10.079 10.079 0 0 0 10.855-4.835 9.965 9.965 0 0 0 6.75-3.668 10.079 10.079 0 0 0 1.252-11.954Z" fill="currentColor"/></svg>
+      <div class="welcome-logo-ring">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
       </div>
       <h1 class="welcome-title" id="welcomeTitle">How can I help you?</h1>
+      <p class="welcome-sub">Ask me anything — code, design, research, or just chat. I'm powered by Groq for ultra-fast responses.</p>
       <div class="suggestion-grid">
         <button class="suggestion-card" onclick="insertSuggestion('Explain how RAG pipelines work and when to use them')">
           <div class="suggestion-icon">🧠</div>
@@ -255,7 +263,7 @@
   <div class="message assistant typing-msg">
     <div class="message-inner">
       <div class="avatar assistant-avatar">
-        <svg width="16" height="16" viewBox="0 0 41 41" fill="none"><path d="M37.532 16.87a9.963 9.963 0 0 0-.856-8.184 10.078 10.078 0 0 0-10.855-4.835 9.964 9.964 0 0 0-6.75-3.668 10.078 10.078 0 0 0-10.855 4.835 9.965 9.965 0 0 0-6.75 3.668 10.079 10.079 0 0 0-1.252 11.954 9.963 9.963 0 0 0 .856 8.185 10.079 10.079 0 0 0 10.855 4.835 9.965 9.965 0 0 0 6.75 3.668 10.079 10.079 0 0 0 10.855-4.835 9.965 9.965 0 0 0 6.75-3.668 10.079 10.079 0 0 0 1.252-11.954Z" fill="currentColor"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
       </div>
       <div class="bubble typing-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
     </div>

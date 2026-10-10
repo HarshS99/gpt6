@@ -84,6 +84,15 @@ const deleteModal   = $('deleteModal');
 const deleteModalLabel=$('deleteModalLabel');
 const deleteCancelBtn=$('deleteCancelBtn');
 const deleteConfirmBtn=$('deleteConfirmBtn');
+const settingsBtn   = $('settingsBtn');
+const settingsModal = $('settingsModal');
+const closeSettings = $('closeSettings');
+const settingsCancelBtn = $('settingsCancelBtn');
+const settingsSaveBtn = $('settingsSaveBtn');
+const themeSelect   = $('themeSelect');
+const temperatureSlider = $('temperatureSlider');
+const tempValue     = $('tempValue');
+const systemPrompt  = $('systemPrompt');
 
 // ══════════════════════════════════════════════════════════
 //  MARKED / HLJS CONFIG
@@ -797,6 +806,48 @@ document.addEventListener('keydown', e => {
   if (ctrl && e.key === 'b') { e.preventDefault(); toggleSidebar(); }
   if (ctrl && e.key === 'l') { e.preventDefault(); if (sessionId) clearChatBtn.click(); }
   if (ctrl && e.key === 'e') { e.preventDefault(); exportChatBtn.click(); }
+});
+
+// ══════════════════════════════════════════════════════════
+//  SETTINGS
+// ══════════════════════════════════════════════════════════
+settingsBtn.addEventListener('click', () => {
+  userDropdown.style.display = 'none';
+  themeSelect.value = isDark ? 'dark' : 'light';
+  settingsModal.style.display = 'flex';
+});
+closeSettings.addEventListener('click', () => settingsModal.style.display = 'none');
+settingsCancelBtn.addEventListener('click', () => settingsModal.style.display = 'none');
+settingsModal.addEventListener('click', e => { if (e.target === settingsModal) settingsModal.style.display = 'none'; });
+
+temperatureSlider.addEventListener('input', (e) => tempValue.textContent = e.target.value);
+
+settingsSaveBtn.addEventListener('click', () => {
+  const newTheme = themeSelect.value;
+  if (newTheme !== (isDark ? 'dark' : 'light')) {
+    isDark = newTheme === 'dark';
+    applyTheme();
+    saveData();
+  }
+  
+  localStorage.setItem('nexusai_temperature', temperatureSlider.value);
+  localStorage.setItem('nexusai_system_prompt', systemPrompt.value);
+  
+  toast('Settings saved successfully');
+  settingsModal.style.display = 'none';
+});
+
+// Restore settings on load
+document.addEventListener('DOMContentLoaded', () => {
+  const t = localStorage.getItem('nexusai_temperature');
+  if (t) {
+    temperatureSlider.value = t;
+    tempValue.textContent = t;
+  }
+  const sp = localStorage.getItem('nexusai_system_prompt');
+  if (sp) {
+    systemPrompt.value = sp;
+  }
 });
 
 // ══════════════════════════════════════════════════════════

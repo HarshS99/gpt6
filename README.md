@@ -1,18 +1,51 @@
 <div align="center">
 
-# 🤖 NexusAI
+<img src="https://img.shields.io/badge/NexusAI-v3.0-8b5cf6?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0xMiAyTDIgN2wxMCA1IDEwLTUtMTAtNXoiLz48cGF0aCBkPSJNMiAxN2wxMCA1IDEwLTUiLz48cGF0aCBkPSJNMiAxMmwxMCA1IDEwLTUiLz48L3N2Zz4=&logoColor=white" alt="NexusAI" />
 
-### A production-ready, ChatGPT-like AI chatbot powered by Groq & LangChain
+# NexusAI
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![LangChain](https://img.shields.io/badge/LangChain-latest-orange?logo=chainlink&logoColor=white)](https://langchain.com)
-[![Groq](https://img.shields.io/badge/Groq-API-purple?logoColor=white)](https://groq.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+### A production-ready, ChatGPT-like AI assistant — built with Groq, LangChain & FastAPI
 
-![NexusAI Demo](https://img.shields.io/badge/Status-Active-brightgreen)
+[![Python](https://img.shields.io/badge/Python-3.10+-3b82f6?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-latest-8b5cf6?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![LangChain](https://img.shields.io/badge/LangChain-latest-8b5cf6?style=flat-square&logoColor=white)](https://langchain.com)
+[![Groq](https://img.shields.io/badge/Groq-Powered-3b82f6?style=flat-square&logoColor=white)](https://groq.com)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-RAG-8b5cf6?style=flat-square&logoColor=white)](https://trychroma.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)]()
 
 </div>
+
+---
+
+## 🎨 UI Preview
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│  🟣 NexusAI                              ◉ NexusAI  🌙 🗑️    │
+├──────────────────┬─────────────────────────────────────────────┤
+│                  │                                             │
+│  🔍 Search       │     ╭──────────────────────────────╮       │
+│  ─────────────── │     │   🚀                         │       │
+│  ➕ New Chat     │     │   How can I help you?         │       │
+│                  │     │                               │       │
+│  Today           │     │   Ask me anything — code,    │       │
+│  ○ Chat 1        │     │   design, research or chat.   │       │
+│  ● Chat 2 ←      │     │   Powered by Groq ⚡          │       │
+│                  │     ╰──────────────────────────────╯       │
+│  ─────────────── │                                             │
+│  📄 Upload doc   │    🧠 Explain RAG  ⚡ FastAPI+JWT          │
+│                  │    🐛 Debug async  🏗️ Microservices         │
+│  👤 Harsh Singh  │                                             │
+│  @harsh...       │  ╭─────────────────────────────────────╮   │
+│                  │  │ 📎  Message NexusAI...          ➤  │   │
+│                  │  ╰─────────────────────────────────────╯   │
+└──────────────────┴─────────────────────────────────────────────┘
+
+  Dark · Glassmorphism · Purple/Blue gradient · Streaming SSE
+```
+
+> **Design:** Dark glassmorphism · Ambient purple/blue orbs · Gradient accents · Floating logo animation · Smooth micro-interactions
 
 ---
 
@@ -20,56 +53,43 @@
 
 | Feature | Description |
 |---|---|
-| 🔴 **Streaming Responses** | Word-by-word token streaming just like ChatGPT |
-| 🔐 **Auth System** | Register, Login, Logout with secure token sessions |
+| 🔴 **Word-by-word Streaming** | Real-time SSE token streaming — just like ChatGPT |
+| 🔐 **Auth System** | Register · Login · Logout with secure per-user sessions |
 | 🧠 **RAG Pipeline** | Upload documents and chat with your own data |
-| 💾 **Per-user Memory** | Isolated chat history per user session |
-| 📄 **Document Upload** | Support for PDF, TXT, DOCX and more |
-| 🌐 **Modern UI** | Glassmorphism dark-mode UI inspired by ChatGPT |
-| ⚡ **Groq-powered** | Ultra-fast LLM inference via Groq API |
-| 🔍 **Vector Search** | ChromaDB with HuggingFace embeddings |
-
----
-
-## 📸 Screenshots
-
-> A sleek dark-mode interface with a sidebar, streaming chat, user auth, and document uploads.
-
-```
-┌──────────────────────────────────────────────────────────┐
-│  NexusAI                                         [Logout] │
-├──────────────┬───────────────────────────────────────────┤
-│  🔍 Search   │                                           │
-│  ─────────── │         Ask me anything...                │
-│  📁 New Chat │                                           │
-│  📄 Upload   │  ┌─────────────────────────────────────┐  │
-│  ─────────── │  │ H  hi                               │  │
-│  Today       │  └─────────────────────────────────────┘  │
-│  > Chat 1    │  ┌─────────────────────────────────────┐  │
-│  > Chat 2    │  │ 🤖 Hello! How can I help you today? │  │
-│              │  └─────────────────────────────────────┘  │
-│  H Harsh     │  ─────────────────────────────────────── │
-│  @email      │  [ Message NexusAI...              Send ] │
-└──────────────┴───────────────────────────────────────────┘
-```
+| 💾 **Chat Memory** | Isolated conversation history per user session |
+| 📄 **Document Upload** | PDF, TXT, DOCX, MD support with vector indexing |
+| 🎨 **Glassmorphism UI** | Premium dark UI with purple/blue gradient accents |
+| ⚡ **Groq-powered LLM** | Ultra-fast inference — responses in milliseconds |
+| 🔍 **Vector Search** | ChromaDB + HuggingFace Sentence Transformers |
+| 🌙 **Dark/Light Mode** | Toggle between dark and light themes |
+| ⌨️ **Keyboard Shortcuts** | `Ctrl+N`, `Ctrl+B`, `Enter`, `Esc` and more |
+| 📥 **Export Chats** | Download full conversation history |
+| 🔢 **Markdown Rendering** | Code blocks, tables, lists, syntax highlighting |
 
 ---
 
 ## 🛠️ Tech Stack
 
 **Backend**
-- [FastAPI](https://fastapi.tiangolo.com/) — High-performance Python web framework
-- [LangChain](https://langchain.com/) — LLM orchestration and RAG pipelines
-- [Groq API](https://groq.com/) — Lightning-fast LLM inference
-- [ChromaDB](https://www.trychroma.com/) — Local vector database for document storage
-- [HuggingFace Sentence Transformers](https://huggingface.co/sentence-transformers) — Embedding model
-- [Server-Sent Events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) — Real-time streaming
+
+| Tool | Purpose |
+|------|---------|
+| [FastAPI](https://fastapi.tiangolo.com/) | High-performance async Python web framework |
+| [LangChain](https://langchain.com/) | LLM orchestration, prompt chaining & RAG |
+| [Groq API](https://groq.com/) | Lightning-fast LLM inference endpoint |
+| [ChromaDB](https://www.trychroma.com/) | Local vector database for document storage |
+| [HuggingFace Sentence Transformers](https://huggingface.co/sentence-transformers) | Text embedding model (`all-mpnet-base-v2`) |
+| SSE (Server-Sent Events) | Real-time streaming without WebSocket overhead |
 
 **Frontend**
-- Vanilla HTML, CSS & JavaScript — Zero framework dependencies
-- Glassmorphism dark-mode design
-- `EventSource` / `ReadableStream` API for token streaming
-- LocalStorage-based chat persistence
+
+| Tool | Purpose |
+|------|---------|
+| Vanilla HTML/CSS/JS | Zero-framework frontend for maximum speed |
+| Glassmorphism CSS | `backdrop-filter: blur()` + gradient design system |
+| `EventSource` / `ReadableStream` | Streaming token consumption |
+| [marked.js](https://marked.js.org/) + [highlight.js](https://highlightjs.org/) | Markdown & syntax highlighting |
+| LocalStorage | Client-side chat persistence |
 
 ---
 
@@ -77,7 +97,7 @@
 
 ### Prerequisites
 
-- Python 3.10+
+- Python 3.10 or higher
 - A **[Groq API Key](https://console.groq.com/)** (free tier available)
 - Git
 
@@ -88,7 +108,7 @@ git clone https://github.com/HarshS99/gpt6.git
 cd gpt6
 ```
 
-### 2. Create a Virtual Environment
+### 2. Create Virtual Environment
 
 ```bash
 python3 -m venv venv
@@ -102,7 +122,7 @@ source venv/bin/activate       # macOS / Linux
 pip install -r requirements.txt
 ```
 
-### 4. Set Up Environment Variables
+### 4. Configure Environment
 
 Create a `.env` file in the project root:
 
@@ -120,7 +140,7 @@ uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
 ### 6. Open the App
 
-Navigate to **[http://localhost:8000](http://localhost:8000)** in your browser.
+Go to **[http://localhost:8000](http://localhost:8000)** — register an account and start chatting!
 
 ---
 
@@ -128,132 +148,139 @@ Navigate to **[http://localhost:8000](http://localhost:8000)** in your browser.
 
 ```
 gpt6/
-├── main.py                          # FastAPI app — routes, auth, streaming, RAG
+│
+├── main.py                          # FastAPI — routes, auth, streaming, RAG
 ├── requirements.txt                 # Python dependencies
 ├── .env                             # API keys (not committed)
 ├── .gitignore
+├── README.md
 │
 ├── static/                          # Frontend (served by FastAPI)
-│   ├── index.html                   # Main UI page
-│   ├── style.css                    # Glassmorphism dark-mode styles
+│   ├── index.html                   # Main SPA — auth, chat, modals
+│   ├── style.css                    # Glassmorphism dark-mode design system
 │   └── app.js                       # Chat logic, streaming, auth, sidebar
 │
 └── modules/                         # Backend logic modules
-    ├── ai_model/                    # LLM configuration and wrappers
+    ├── ai_model/                    # LLM configuration & wrappers
     ├── file_processing/             # Document parsing (PDF, DOCX, TXT)
-    ├── vector_database/             # ChromaDB vector store setup
+    ├── vector_database/             # ChromaDB vector store
     ├── rag_pipeline/                # Retrieval-Augmented Generation chain
-    ├── memory/                      # Chat message history management
+    ├── memory/                      # Chat message history
     ├── langgraph_workflow/          # LangGraph agent workflow
     ├── llm/                         # LLM provider abstraction
-    └── utilities/                   # Shared helpers and utilities
+    └── utilities/                   # Shared helpers
 ```
 
 ---
 
-## 🔌 API Endpoints
+## 🔌 API Reference
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `POST` | `/api/auth/register` | Register a new user |
-| `POST` | `/api/auth/login` | Log in and receive a token |
+| `POST` | `/api/auth/register` | Register a new user account |
+| `POST` | `/api/auth/login` | Login and receive session token |
 | `POST` | `/api/auth/logout` | Invalidate session token |
 | `POST` | `/api/session` | Create a new chat session |
-| `POST` | `/api/chat/stream` | **SSE streaming chat endpoint** |
-| `POST` | `/api/upload` | Upload a document for RAG |
-| `GET`  | `/`       | Serve the frontend |
+| `POST` | `/api/chat/stream` | **SSE streaming chat** (main endpoint) |
+| `POST` | `/api/upload` | Upload document for RAG indexing |
+| `GET`  | `/` | Serve the SPA frontend |
 
 ---
 
-## 🧠 How RAG Works in This Project
+## 🧠 RAG Architecture
 
 ```
-User uploads a document
-        │
-        ▼
-[File Processing] → Text extracted → Chunked into passages
-        │
-        ▼
-[HuggingFace Embeddings] → Vector representation of each chunk
-        │
-        ▼
-[ChromaDB] → Stored locally in chroma_db/
-        │
-When user asks a question:
-        │
-        ▼
-[Query Embedding] → Similarity search in ChromaDB → Top-k chunks retrieved
-        │
-        ▼
-[LangChain Prompt] → "Given context: {chunks}, answer: {question}"
-        │
-        ▼
-[Groq LLM] → Streams grounded response back to user
+ User uploads document
+         │
+         ▼
+ [File Processing] ──► Text extraction ──► Chunking
+         │
+         ▼
+ [HuggingFace Embeddings]
+         │
+         ▼
+ [ChromaDB] ◄──── stored locally
+         │
+         │  (when user asks a question)
+         ▼
+ [Query Embedding] ──► Cosine similarity search ──► Top-k chunks
+         │
+         ▼
+ [LangChain Prompt]
+ "Given context: {chunks}, answer: {question}"
+         │
+         ▼
+ [Groq LLM] ──SSE──► Streams response word-by-word to browser
 ```
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ Model Configuration
 
-You can change the model in `main.py`:
+Edit `main.py` to change the LLM:
 
 ```python
 def build_llm(streaming: bool = False) -> ChatGroq:
     return ChatGroq(
-        model_name="qwen/qwen3.8-27b",   # ← Change model here
+        model_name="qwen/qwen3.8-27b",   # ← Change here
         api_key=os.getenv("GROQ_API_KEY"),
         max_tokens=800,
         streaming=streaming,
     )
 ```
 
-**Available Groq models** (check your tier at [console.groq.com/docs/models](https://console.groq.com/docs/models)):
-- `llama-3.3-70b-versatile`
-- `llama-3.1-8b-instant`
-- `qwen/qwen3.8-27b`
-- `gemma2-9b-it`
+> Check [console.groq.com/docs/models](https://console.groq.com/docs/models) for the latest available models.
 
 ---
 
-## 🐛 Common Issues
+## ⌨️ Keyboard Shortcuts
 
-| Error | Fix |
-|-------|-----|
+| Shortcut | Action |
+|----------|--------|
+| `Enter` | Send message |
+| `Shift + Enter` | New line |
+| `Ctrl + N` | New chat |
+| `Ctrl + B` | Toggle sidebar |
+| `Ctrl + L` | Clear chat |
+| `Ctrl + E` | Export chat |
+| `Esc` | Stop generating |
+
+---
+
+## 🐛 Troubleshooting
+
+| Error | Solution |
+|-------|----------|
 | `[Errno 48] Address already in use` | Run `kill -9 $(lsof -t -i:8000)` then retry |
-| `model_not_found` / `model_decommissioned` | Update the model name in `main.py` — check [Groq docs](https://console.groq.com/docs/deprecations) |
-| `rate_limit_exceeded` | Lower `max_tokens` in `main.py`, or upgrade your Groq tier |
-| `ERR_CONNECTION_REFUSED` | The server isn't running — run `uvicorn main:app --port 8000 --reload` |
+| `model_not_found` / `model_decommissioned` | Update model in `main.py` — check [Groq deprecations](https://console.groq.com/docs/deprecations) |
+| `rate_limit_exceeded` | Lower `max_tokens` in `main.py` or upgrade Groq tier |
+| `ERR_CONNECTION_REFUSED` | Server not running — run `uvicorn main:app --port 8000 --reload` |
+| `HuggingFace` slow startup | Normal on first run — downloads embedding model once |
 
 ---
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!
-
 1. Fork the repo
-2. Create your feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
+2. Create your branch: `git checkout -b feature/my-feature`
+3. Commit: `git commit -m 'Add my feature'`
+4. Push: `git push origin feature/my-feature`
 5. Open a Pull Request
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
-
----
-
-## 👨‍💻 Author
-
-**Harsh Singh**
-
-[![GitHub](https://img.shields.io/badge/GitHub-HarshS99-black?logo=github)](https://github.com/HarshS99)
+MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 
 <div align="center">
 
-⭐ **Star this repo if you found it helpful!** ⭐
+**Built with 💜 by [Harsh Singh](https://github.com/HarshS99)**
+
+[![GitHub](https://img.shields.io/badge/GitHub-HarshS99-8b5cf6?style=flat-square&logo=github)](https://github.com/HarshS99)
+
+⭐ **Star this repo if you found it useful!** ⭐
 
 </div>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexusAI – AI Assistant</title>
+  <meta name="description" content="NexusAI – ChatGPT-like AI assistant with streaming, memory, and RAG." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" id="hljs-theme" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/10.0.0/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<!-- ══════════ AUTH OVERLAY ══════════ -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card" id="authCard">
+
+    <!-- Logo -->
+    <div class="auth-logo">
+      <svg width="28" height="28" viewBox="0 0 41 41" fill="none"><path d="M37.532 16.87a9.963 9.963 0 0 0-.856-8.184 10.078 10.078 0 0 0-10.855-4.835 9.964 9.964 0 0 0-6.75-3.668 10.078 10.078 0 0 0-10.855 4.835 9.965 9.965 0 0 0-6.75 3.668 10.079 10.079 0 0 0-1.252 11.954 9.963 9.963 0 0 0 .856 8.185 10.079 10.079 0 0 0 10.855 4.835 9.965 9.965 0 0 0 6.75 3.668 10.079 10.079 0 0 0 10.855-4.835 9.965 9.965 0 0 0 6.75-3.668 10.079 10.079 0 0 0 1.252-11.954Zm-15.576 21.737a7.48 7.48 0 0 1-4.801-1.735c.061-.033.168-.091.237-.134l7.964-4.6a1.294 1.294 0 0 0 .655-1.134V19.054l3.366 1.944a.12.12 0 0 1 .066.092v9.299a7.505 7.505 0 0 1-7.487 7.218ZM4.191 33.103a7.477 7.477 0 0 1-.894-5.023c.06.036.162.099.237.141l7.964 4.6a1.297 1.297 0 0 0 1.308 0l9.724-5.614v3.888a.12.12 0 0 1-.048.103l-8.051 4.649a7.504 7.504 0 0 1-10.24-2.744ZM2.756 14.128a7.477 7.477 0 0 1 3.906-3.295A.121.121 0 0 1 6.69 11v9.199a1.294 1.294 0 0 0 .654 1.132l9.723 5.614-3.366 1.944a.12.12 0 0 1-.114.012L4.502 24.2a7.504 7.504 0 0 1-1.746-10.073Zm27.658 6.437-9.724-5.615 3.367-1.943a.121.121 0 0 1 .114-.012l9.084 5.048a7.498 7.498 0 0 1-1.158 13.528v-9.476a1.293 1.293 0 0 0-.683-1.53Zm3.35-5.043c-.059-.037-.162-.099-.236-.141l-7.965-4.6a1.298 1.298 0 0 0-1.308 0l-9.723 5.614v-3.888a.12.12 0 0 1 .048-.103l8.051-4.645a7.497 7.497 0 0 1 11.133 7.763Zm-21.063 6.929-3.367-1.944a.12.12 0 0 1-.065-.092v-9.299a7.497 7.497 0 0 1 12.293-5.756 6.94 6.94 0 0 0-.236.134l-7.965 4.6a1.294 1.294 0 0 0-.654 1.132l-.006 11.225Zm1.829-3.943 4.33-2.501 4.332 2.5v4.999l-4.331 2.5-4.331-2.5V18.508Z" fill="currentColor"/></svg>
+    </div>
+
+    <!-- ── LOGIN FORM ── -->
+    <div id="loginView">
+      <h2 class="auth-title">Welcome back</h2>
+      <p class="auth-sub">Sign in to NexusAI</p>
+      <div class="auth-error" id="loginError"></div>
+      <div class="form-group">
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" placeholder="Enter username" autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <div class="password-wrap">
+          <input type="password" id="loginPassword" placeholder="Enter password" autocomplete="current-password" />
+          <button class="eye-btn" id="loginEye" tabindex="-1" type="button">
+            <svg class="eye-icon show-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-icon hide-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
+        </div>
+      </div>
+      <button class="auth-btn" id="loginBtn">Sign in</button>
+      <div class="auth-demo">
+        <span>Demo accounts:</span>
+        <code>admin / admin123</code> &nbsp;·&nbsp; <code>harsh / harsh123</code>
+      </div>
+      <p class="auth-switch">Don't have an account? <button id="goRegister">Sign up</button></p>
+    </div>
+
+    <!-- ── REGISTER FORM ── -->
+    <div id="registerView" style="display:none">
+      <h2 class="auth-title">Create account</h2>
+      <p class="auth-sub">Join NexusAI today</p>
+      <div class="auth-error" id="registerError"></div>
+      <div class="form-group">
+        <label for="regDisplayName">Display name</label>
+        <input type="text" id="regDisplayName" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label for="regUsername">Username</label>
+        <input type="text" id="regUsername" placeholder="Choose a username" autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label for="regPassword">Password <span style="color:var(--text-faint);font-weight:400">(min 6 chars)</span></label>
+        <input type="password" id="regPassword" placeholder="Create a password" autocomplete="new-password" />
+      </div>
+      <button class="auth-btn" id="registerBtn">Create account</button>
+      <p class="auth-switch">Already have an account? <button id="goLogin">Sign in</button></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ TOAST CONTAINER ══════════ -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ══════════ SIDEBAR ══════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top">
+    <button class="icon-btn" id="sidebarCloseBtn" title="Close sidebar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <button class="icon-btn new-chat-icon" id="newChatBtn" title="New chat">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+  </div>
+
+  <div class="sidebar-search">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="historySearch" placeholder="Search chats…" autocomplete="off" />
+  </div>
+
+  <div class="history-scroll" id="historyScroll">
+    <div class="history-section-label">Today</div>
+    <div class="chat-history" id="chatHistory"></div>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="upload-area" id="uploadArea" tabindex="0" role="button">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+      <span>Upload document</span>
+      <input type="file" id="fileInput" accept=".pdf,.txt,.md,.docx" hidden />
+    </div>
+    <div class="upload-status" id="uploadStatus"></div>
+
+    <div class="sidebar-user" id="userMenuBtn">
+      <div class="user-avatar-sm" id="userAvatarSm">?</div>
+      <div class="user-info">
+        <span class="user-display-name" id="userDisplayName">Loading…</span>
+        <span class="user-username" id="userUsername"></span>
+      </div>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+    </div>
+
+    <!-- User dropdown -->
+    <div class="user-dropdown" id="userDropdown" style="display:none">
+      <button class="dropdown-item" id="exportChatBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export chat
+      </button>
+      <button class="dropdown-item" id="shortcutsBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 2v5M8 2v5M2 11h20"/></svg>
+        Keyboard shortcuts
+      </button>
+      <div class="dropdown-divider"></div>
+      <button class="dropdown-item danger" id="logoutBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Log out
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════ MAIN ══════════ -->
+<main class="main" id="main">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="icon-btn" id="sidebarToggle" title="Toggle sidebar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <div class="topbar-center">
+      <div class="model-badge">
+        <div class="model-dot"></div>
+        <span id="modelLabel">NexusAI</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="icon-btn" id="themeToggle" title="Toggle theme">
+        <svg class="sun-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="moon-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="icon-btn" id="clearChatBtn" title="Clear current chat">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Scroll-to-bottom button -->
+  <button class="scroll-btn" id="scrollBtn" style="display:none" title="Scroll to bottom">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+
+  <!-- Messages -->
+  <div class="messages-container" id="messagesContainer">
+    <!-- Welcome -->
+    <div class="welcome-state" id="welcomeState">
+      <div class="welcome-logo">
+        <svg width="30" height="30" viewBox="0 0 41 41" fill="none"><path d="M37.532 16.87a9.963 9.963 0 0 0-.856-8.184 10.078 10.078 0 0 0-10.855-4.835 9.964 9.964 0 0 0-6.75-3.668 10.078 10.078 0 0 0-10.855 4.835 9.965 9.965 0 0 0-6.75 3.668 10.079 10.079 0 0 0-1.252 11.954 9.963 9.963 0 0 0 .856 8.185 10.079 10.079 0 0 0 10.855 4.835 9.965 9.965 0 0 0 6.75 3.668 10.079 10.079 0 0 0 10.855-4.835 9.965 9.965 0 0 0 6.75-3.668 10.079 10.079 0 0 0 1.252-11.954Z" fill="currentColor"/></svg>
+      </div>
+      <h1 class="welcome-title" id="welcomeTitle">How can I help you?</h1>
+      <div class="suggestion-grid">
+        <button class="suggestion-card" onclick="insertSuggestion('Explain how RAG pipelines work and when to use them')">
+          <div class="suggestion-icon">🧠</div>
+          <div class="suggestion-text"><strong>Explain RAG pipelines</strong><span>Vector search & retrieval</span></div>
+        </button>
+        <button class="suggestion-card" onclick="insertSuggestion('Write a FastAPI REST API with JWT authentication and role-based access control')">
+          <div class="suggestion-icon">⚡</div>
+          <div class="suggestion-text"><strong>FastAPI + JWT auth</strong><span>Role-based access control</span></div>
+        </button>
+        <button class="suggestion-card" onclick="insertSuggestion('Debug this Python async issue: my tasks are running sequentially instead of concurrently')">
+          <div class="suggestion-icon">🐛</div>
+          <div class="suggestion-text"><strong>Debug async Python</strong><span>Concurrency & race conditions</span></div>
+        </button>
+        <button class="suggestion-card" onclick="insertSuggestion('Design a scalable microservices architecture for an e-commerce platform')">
+          <div class="suggestion-icon">🏗️</div>
+          <div class="suggestion-text"><strong>Microservices design</strong><span>Scalable e-commerce arch</span></div>
+        </button>
+      </div>
+    </div>
+
+    <div class="messages" id="messages"></div>
+  </div>
+
+  <!-- Input -->
+  <div class="input-area">
+    <div class="input-wrapper" id="inputWrapper">
+      <button class="attach-btn" id="attachBtn" title="Attach file">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+      </button>
+      <textarea id="messageInput" class="message-input" placeholder="Message NexusAI…" rows="1"></textarea>
+      <!-- Stop button (shown while streaming) -->
+      <button class="stop-btn" id="stopBtn" style="display:none" title="Stop generating">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+      </button>
+      <!-- Send button -->
+      <button class="send-btn" id="sendBtn" disabled title="Send message">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21 23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+    <p class="input-disclaimer">NexusAI can make mistakes. Verify important information.</p>
+  </div>
+</main>
+
+<!-- ══════════ KEYBOARD SHORTCUTS MODAL ══════════ -->
+<div class="modal-overlay" id="shortcutsModal" style="display:none">
+  <div class="modal shortcuts-modal">
+    <div class="modal-header">
+      <h3>Keyboard shortcuts</h3>
+      <button class="icon-btn modal-close" id="closeShortcuts">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="shortcuts-grid">
+      <div class="shortcut-row"><kbd>Enter</kbd><span>Send message</span></div>
+      <div class="shortcut-row"><kbd>Shift</kbd>+<kbd>Enter</kbd><span>New line</span></div>
+      <div class="shortcut-row"><kbd>Ctrl</kbd>+<kbd>N</kbd><span>New chat</span></div>
+      <div class="shortcut-row"><kbd>Ctrl</kbd>+<kbd>B</kbd><span>Toggle sidebar</span></div>
+      <div class="shortcut-row"><kbd>Ctrl</kbd>+<kbd>L</kbd><span>Clear chat</span></div>
+      <div class="shortcut-row"><kbd>Ctrl</kbd>+<kbd>E</kbd><span>Export chat</span></div>
+      <div class="shortcut-row"><kbd>Esc</kbd><span>Stop generating</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DELETE CONFIRM MODAL ══════════ -->
+<div class="modal-overlay" id="deleteModal" style="display:none">
+  <div class="modal">
+    <h3>Delete chat?</h3>
+    <p>This will permanently delete <strong id="deleteModalLabel"></strong>.</p>
+    <div class="modal-actions">
+      <button class="btn-secondary" id="deleteCancelBtn">Cancel</button>
+      <button class="btn-danger" id="deleteConfirmBtn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Typing indicator template -->
+<template id="typingTpl">
+  <div class="message assistant typing-msg">
+    <div class="message-inner">
+      <div class="avatar assistant-avatar">
+        <svg width="16" height="16" viewBox="0 0 41 41" fill="none"><path d="M37.532 16.87a9.963 9.963 0 0 0-.856-8.184 10.078 10.078 0 0 0-10.855-4.835 9.964 9.964 0 0 0-6.75-3.668 10.078 10.078 0 0 0-10.855 4.835 9.965 9.965 0 0 0-6.75 3.668 10.079 10.079 0 0 0-1.252 11.954 9.963 9.963 0 0 0 .856 8.185 10.079 10.079 0 0 0 10.855 4.835 9.965 9.965 0 0 0 6.75 3.668 10.079 10.079 0 0 0 10.855-4.835 9.965 9.965 0 0 0 6.75-3.668 10.079 10.079 0 0 0 1.252-11.954Z" fill="currentColor"/></svg>
+      </div>
+      <div class="bubble typing-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+    </div>
+  </div>
+</template>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

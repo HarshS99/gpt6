@@ -1,0 +1,8 @@
+langchain
+langgraph
+chromadb
+streamlit
+streamlit-chat
+langchain-groq
+python-dotenv
+langchain-community
